@@ -25,9 +25,9 @@ getImmo<-function (type="Wohnung-Miete",region="Rheinland-Pfalz/Koblenz", maxPag
   
    if (counter==1)
    {
-     pagenum<-paste("P-",formatC(0, width = 3, format = "d", flag = "0"), sep="") 
+     pagenum<-paste("P-",formatC(0, width = 4, format = "d", flag = "0"), sep="") 
    }else{
-     pagenum<-paste("P-",formatC(counter, width = 3, format = "d", flag = "0"), sep="") 
+     pagenum<-paste("P-",formatC(counter, width = 4, format = "d", flag = "0"), sep="") 
    }
      
   
