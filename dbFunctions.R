@@ -20,23 +20,25 @@ disconnectPostgres=function(con)
 writeImmoLog<-function (fa, region, curDate)
 {
   channel<-connectPostgres()  #, pwd = "locknload"
-  qr<-paste("select max(importdate) from immolog where region='",region, "'", sep="")
+  qr<-paste("select max(importdate) from immolog where region='",region, "' and qtype=",max(fa$qtype), sep="")
   mx<-dbGetQuery(channel, qr)
   disconnectPostgres(channel)
   
-  
+ 
   if (as.POSIXlt(mx$max,tz = "GMT")<as.POSIXlt(curDate,tz = "GMT")|is.na(mx$max))
   {
     #write
-    fr<-fa[,c("id", "importdate", "region")]
+    fr<-fa[,c("id", "importdate", "region", "qtype")]
     fnd<-fr[!duplicated(fr[,"id"]),]
       
     startzeit<-Sys.time()
     
+    #print(str(fnd))
+    
     channel<-connectPostgres()  #, pwd = "locknload"
     
     dbWriteTable(channel, name="immolog", value=fnd , append=TRUE, row.names=FALSE, overwrite=FALSE)
-    #dbWriteTable(channel, name="immolog", value=fnd )
+    #dbWriteTable(channel, name="immolog", value=fnd, row.names=FALSE )
     
     disconnectPostgres(channel)
     
@@ -62,9 +64,9 @@ writeImmoList=function(fa)
   
   channel<-connectPostgres()  
   dbWriteTable(channel, name="newrows", value=ids)
-  try(dbSendPQuery(conn = channel, statement = "delete from immolist where id in (select id from newrows)"))
+  try(dbSendQuery(conn = channel, statement = "delete from immolist where id in (select id from newrows)"))
   
-  #dbWriteTable(channel, name="immolist", value=fand)
+  #dbWriteTable(channel, name="immolist", value=fand, row.names=FALSE)
   dbWriteTable(channel, name="immolist", value=fand,append=TRUE, row.names=FALSE, overwrite=FALSE)
   disconnectPostgres(channel) 
 

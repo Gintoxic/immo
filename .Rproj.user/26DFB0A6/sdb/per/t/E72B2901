@@ -1,0 +1,17 @@
+{
+    "contents" : "load(\"../immoData/DEU_adm1.Rdata\")\n\nregionList<-names(table(gadm$NAME_1))\n\nregionList[16]<-\"Thueringen\"\nregionList[1]<-\"Baden-Wuerttemberg\"\n\n#regionList<-\"Nordrhein-Westfalen\"\n\n#regionList<-regionList[2:16]\n#regionList<-\"Baden-Wuerttemberg\"\n#regionList<-\"Thueringen\"\n#region<-\"Thueringen\"\n",
+    "created" : 1409076026041.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3450099933",
+    "id" : "E72B2901",
+    "lastKnownWriteTime" : 1408895823,
+    "path" : "D:/Work/immo/scriptRegionList.R",
+    "project_path" : "scriptRegionList.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,16 @@
+{
+    "contents" : "\n\nlibrary(sp)\nlibrary(XML)\nlibrary(rjson)\nlibrary(dplyr)\n\nsource(\"getImmo.R\")\nsource(\"dbFunctions.R\")\n              \nfor (typeind in 1:dim(qframe)[1])\n{\n\nfor (region in regionList)\n{\n  qtype<-as.integer(as.character(qframe$qtype[typeind]))\n  \n  fa<-getImmo(region=region,type=qframe$qstring[typeind],maxPages = 10000)\n\n# attributes<-as.data.frame(matrix(unlist(strsplit(f$attributes, \";\")), nrow=dim(f)[1], ncol=3, byrow = T), stringsAsFactors = F)\n# colnames(attributes)<-c(\"price\",\"area\", \"rooms\")\n# fa<-cbind(f,attributes)\n\n\ncurDate<-as.character(Sys.Date())\n\nfa$importdate<-curDate\nfa$region<-region\nfa$qtype<-qtype\n\nregion_<-gsub(\"/\",\"_\",region)\ndate_<-format(Sys.Date(), \"%Y%m%d\")\n\ntit<-fa$title%>%lapply(function(x) if(is.character(x)|is.factor(x)) gsub(\"\\u0022\",\"\",x) else x)%>%unlist() ### \"\"\"\nfa$title<-tit\n\ncolnames(fa)[9]<-\"attribs\"\nfa$id<-as.integer(fa$id)\nfa$privateOffer<-as.logical(fa$privateOffer)\n\n\ndir.create(paste(\"../immoData/\",date_, sep=\"\"))\n#filenameCSV<-paste(\"../immoData/\",date_,\"/\",region_, \"_\",date_, \".csv\",sep=\"\")\n#write.table(fa,file =  filenameCSV, row.names = F, sep=\";\", fileEncoding=\"UTF-8\", quote = TRUE)\n\nfilenameRda<-paste(\"../immoData/\",date_,\"/\"  ,date_,\"_\",qtype,\"_\"  ,region_,  \".Rdata\",sep=\"\")\nsave(\"fa\", file=filenameRda)\n\nwriteImmoLog(fa, region, curDate)\nwriteImmoList(fa)\n\n}}\n",
+    "created" : 1409075416657.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "194432202",
+    "id" : "283A1D00",
+    "lastKnownWriteTime" : 1409080784,
+    "path" : "D:/Work/immo/immoScript.R",
+    "project_path" : "immoScript.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
