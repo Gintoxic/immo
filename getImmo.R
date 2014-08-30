@@ -76,6 +76,14 @@ getImmo<-function (type="Wohnung-Miete",region="Rheinland-Pfalz/Koblenz", maxPag
   }# for
   
   #frame
+#   importdate=strftime(Sys.Date(),format="%Y-%m-%d" )
+#   for (i in 1:dim(frame)[1])
+#   {
+#     readWriteExpose(id=frame$id[i], importdate=importdate)
+#     
+#   }
+#   
+  
   
     if(counter==1)
     {

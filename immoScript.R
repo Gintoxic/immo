@@ -4,9 +4,12 @@ library(sp)
 library(XML)
 library(rjson)
 library(dplyr)
+library(RJDBC)
 
 source("getImmo.R")
 source("dbFunctions.R")
+source("readWriteExpose.R")
+source("extractFunctions.R")
               
 for (typeind in 1:dim(qframe)[1])
 {
@@ -17,6 +20,8 @@ for (region in regionList)
   
   fa<-getImmo(region=region,type=qframe$qstring[typeind],maxPages = 10000)
 
+  
+  
 # attributes<-as.data.frame(matrix(unlist(strsplit(f$attributes, ";")), nrow=dim(f)[1], ncol=3, byrow = T), stringsAsFactors = F)
 # colnames(attributes)<-c("price","area", "rooms")
 # fa<-cbind(f,attributes)
