@@ -36,7 +36,7 @@ getImmo<-function (type="Wohnung-Miete",region="Rheinland-Pfalz/Koblenz", maxPag
   print(myurl)
 
   
-  doc<-htmlParse(myurl, encoding="UTF-8")
+  doc<-try(htmlParse(myurl, encoding="UTF-8"))
 
   ch<-as(doc, "character")
   jsonstart<-regexpr("model:",ch)[1]+7

@@ -10,7 +10,10 @@ source("getImmo.R")
 source("dbFunctions.R")
 source("readWriteExpose.R")
 source("extractFunctions.R")
-              
+source("scriptQFrame.R")
+source("scriptRegionList.R")              
+
+
 for (typeind in 1:dim(qframe)[1])
 {
 

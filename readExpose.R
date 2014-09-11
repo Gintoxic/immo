@@ -1,12 +1,12 @@
 
 
 
-readExpose=function (id, importdate)
+readExpose=function (id,importdate)
 {
 idc<-as.character(id)
 before<-"http://www.immobilienscout24.de/expose/"
 urllink<-paste(before, idc,sep="")
-Sys.sleep(runif(min = 1.1, max=2,n = 1))
+Sys.sleep(0.1)
 
 
 doc=try(htmlParse(urllink))
