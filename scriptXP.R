@@ -12,7 +12,7 @@ source("readExpose.R")
 source("extractFunctions.R")
 
 
-for (iii in 1:20)
+for (iii in 1:1)
 {
 
 startzeit<-Sys.time()
