@@ -1,0 +1,17 @@
+{
+    "contents" : "ginhist2d<-\nfunction (x, y = NULL,val, nbins = 200, same.scale = FALSE, na.rm = TRUE, \n          show = TRUE, col = c(\"black\", heat.colors(12)), FUN = base::length, \n          func = \"sum\",\n          xlab, ylab, ...) \n{\n  if (is.null(y)) {\n    if (ncol(x) != 2) \n      stop(\"If y is ommitted, x must be a 2 column matirx\")\n    y <- x[, 2]\n    x <- x[, 1]\n  }\n  if (length(nbins) == 1) \n    #nbins <- rep(nbins, 2)\n    nbins <- c(nbins, round(nbins*1.375))\n  nas <- is.na(x) | is.na(y)\n  if (na.rm) {\n    x <- x[!nas]\n    y <- y[!nas]\n  }\n  else stop(\"missinig values not permitted if na.rm=FALSE\")\n  if (same.scale) {\n    x.cuts <- seq(from = min(x, y), to = max(x, y), length = nbins[1] + \n                    1)\n    y.cuts <- seq(from = min(x, y), to = max(x, y), length = nbins[2] + \n                    1)\n  }\n  else {\n    x.cuts <- seq(from = min(x), to = max(x), length = nbins[1] + \n                    1)\n    y.cuts <- seq(from = min(y), to = max(y), length = nbins[2] + \n                    1)\n  }\n  index.x <- cut(x, x.cuts, include.lowest = TRUE)\n  index.y <- cut(y, y.cuts, include.lowest = TRUE)\n  \n  \n  if (func==\"sum\")\n  {\n  m <- tapply(val, list(index.x, index.y), FUN=sum)\n  }else if (func==\"mean\")\n  {\n  m <- tapply(val, list(index.x, index.y), FUN=mean)  \n  }else {warning(\"unknown function\")}\n  \n  if (identical(FUN, base::length)) \n    m[is.na(m)] <- 0\n  if (missing(xlab)) \n    xlab <- deparse(substitute(xlab))\n  if (missing(ylab)) \n    ylab <- deparse(substitute(ylab))\n  if (show) \n    \n    im.ret<-image(x.cuts, y.cuts, m, col = col, xlab = \"\", ylab = \"\", xaxt=\"n\" ,yaxt=\"n\" ,\n          ...)\n  \n  \n  \n#   #labels\n#   xx<-im.ret[[2]]\n#   yy<-im.ret[[3]]\n#   for (j in 1:length(yy))\n#   {\n#   for (i in 1:length(xx))\n#   {\n#     mm<-as.matrix(m)\n#     print(c(i,j))\n# #       if (mm[i,j]!=0){\n# #       text(xx[i]+(xx[2]-xx[1])/2, yy [j], i, pos=3)\n# #       }\n#    }\n#   }\n  \n# print(im.ret)\n  midpoints <- function(x) (x[-1] + x[-length(x)])/2\n  retval <- list()\n  retval$counts <- m\n  retval$x.breaks = x.cuts\n  retval$y.breaks = y.cuts\n  retval$x = midpoints(x.cuts)\n  retval$y = midpoints(y.cuts)\n  retval$nobs = length(x)\n  retval$call <- match.call()\n  class(retval) <- \"hist2d\"\n  retval\n  return(im.ret)\n}",
+    "created" : 1438352631244.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2480168882",
+    "id" : "473182AD",
+    "lastKnownWriteTime" : 1438431329,
+    "path" : "E:/Work/immo/ginhist2d.R",
+    "project_path" : "ginhist2d.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}

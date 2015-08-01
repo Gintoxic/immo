@@ -1,0 +1,16 @@
+{
+    "contents" : "\n\nlibrary(sp)\nlibrary(XML)\nlibrary(rjson)\n#library(dplyr)\nlibrary(RJDBC)\nlibrary(stringr)\nlibrary(RCurl)\n\nsource(\"dbFunctions.R\")\n# source(\"readExpose.R\")\n# source(\"extractFunctions.R\")\n\nstartzeit<-Sys.time()\nchannel<-connectPostgres()  \n\nstmnt<-\n  \"with add as(select distinct on(address) id, address from immolist) select a.* from add a left join immogeo g on a.address=g.address where g.id is null\"\n\n\n#stmnt<-gsub(\"<IMPDATE>\",as.character(Sys.Date(), \"%Y-%m-%d\"),stmnt)\n\n#stmnt<-\"select distinct on(address) id, address from immolist\"\n# stmnt = paste(\"select distinct on(address) id, address from immolist where qtype=1 and importdate='\",\n#               as.character(Sys.Date(), \"%Y-%m-%d\"),\"' \",sep=\"\")\n\n#stmnt = paste(\"select distinct on(address) id, address from immolist where qtype=1\")\n\n\nwhgm<-dbGetQuery(conn = channel, statement = stmnt)\n\ndisconnectPostgres(channel)\n\nlaufzeit<-Sys.time()-startzeit\nprint(laufzeit)\n\nstr(whgm)\nwhgm[1:10,]\n\nproc.started<-0\nfor (i in 1:450)\n{\naddr<-gsub(\"(Kreis)\",\"\",gsub(\" \",\"%20\",gsub(\"ß\",\"ss\",gsub(\"ä\",\"ae\",gsub(\"ö\",\"oe\",gsub(\"ü\",\"ue\", whgm$address[i]))))))\n\n\nbase_url<-\"http://nominatim.openstreetmap.org/search?q=<ADDRESS>&format=json&polygon=0&addressdetails=1\"\n\nrequrl<-gsub(\"<ADDRESS>\", addr, base_url)\nr <- getURL(requrl)\nf <- try(fromJSON(r))\nprint(i)\nprint (requrl)\nprint(length(f))\n\nif(length(f)>0)\n{\n  \nlon<-f[[1]]$lon\ndf<-as.data.frame(lon)\ndf$lon<-as.numeric(f[[1]]$lon)\ndf$lat<-as.numeric(f[[1]]$lat)\ndf$placeid<-as.integer(f[[1]]$place_id)\ndf$id<-whgm$id[i]\ndf$address<-whgm$address[i]\nif (proc.started==0){\n  dfa<-df\n}else{\n  dfa<-rbind(dfa,df)\n}\nproc.started=1\n}\n\n\n\n\n}\n\n\n\nstartzeit<-Sys.time()\nchannel<-connectPostgres()  #, pwd = \"locknload\"\ndbWriteTable(channel, name=\"immogeo\", value=dfa , append=TRUE, row.names=FALSE, overwrite=FALSE)\n#dbWriteTable(channel, name=\"immogeo\", value=dfa , row.names=FALSE)\ndisconnectPostgres(channel)\nlaufzeit<-Sys.time()-startzeit\nprint(laufzeit)\n\n\n\n\n\n# \n# \n# \n# \n# numlloops<-dim(whgm)[1]\n# \n# for (i in 1:10000)\n#   #for (i in 1:numlloops)\n# {\n#   print(paste(i,\" of \",numlloops))\n#   \n#   xp<-try(readExpose(whgm$id[i], paste(as.character(Sys.Date(), \"%Y-%m-%d\"),sep=\"\")))\n#   \n#   if(i==1 ){\n#     allxp<-xp\n#   }else{\n#     allxp<-rbind(allxp,xp)\n#   }\n#   \n# }\n# \n# dim(allxp)\n# length(unique(allxp$id))\n# \n# \n# startzeit<-Sys.time()\n# channel<-connectPostgres()  #, pwd = \"locknload\"\n# dbWriteTable(channel, name=\"immoxp1\", value=allxp , append=TRUE, row.names=FALSE, overwrite=FALSE)\n# disconnectPostgres(channel)\n# laufzeit<-Sys.time()-startzeit\n# print(laufzeit)\n# \n# \n\n",
+    "created" : 1438349038575.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3666520289",
+    "id" : "1B3B400A",
+    "lastKnownWriteTime" : 1438352407,
+    "path" : "E:/Work/immo/geocodeR.R",
+    "project_path" : "geocodeR.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

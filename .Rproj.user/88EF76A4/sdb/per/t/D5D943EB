@@ -1,0 +1,16 @@
+{
+    "contents" : "# install.packages(\"gdata\")\n# install.packages(\"RCurl\") \n# install.packages(\"rjson\")\n# install.packages(\"RDSTK\")\n# install.packages(\"SDMTools\")\n# install.packages(\"sp\")\n\nlibrary(gdata)\nlibrary(RCurl)\nlibrary(rjson)\nlibrary(RDSTK)\nlibrary(SDMTools)\nlibrary(sp)\n\npf<-\"c:/Tools/strawberry/perl/bin/perl.exe\"\ninstallXLSXsupport(perl=pf)\n\ngetwd()\nxlsFile<-\"Adressen.xls\"\nadressen_imp<-read.xls(xls=xlsFile, perl=pf)\nstr(adressen_imp)\n\nName<-adressen_imp$Name\nadressen<-as.data.frame(Name)\nadressen$Name<-as.character(adressen$Name)\nadressen$Adresse<-as.character(adressen_imp$Adresse)\n\nadressen$Name\nadressen[2,1]\n\n\ncur=\"Pfuhlgasse,Koblenz,Germany\"\ncur=\"Zeisigweg, Bonn, Germany\"\nbase_url<-\"http://nominatim.openstreetmap.org/search?q=<TO_REPLACE>&format=json&polygon=0&addressdetails=1\"\n\nbase_url<-\"http://maps.googleapis.com/maps/api/geocode/json?address=<TO_REPLACE>&sensor=false\"\n\n#cur<-adressen$Adresse[2]\nrequrl<-gsub(\"<TO_REPLACE>\", cur, base_url)\nrequrl<-gsub(\" \", \"\", requrl)\n\n\nr <- getURL(requrl)\nf <- fromJSON(r)\nfs<-f[[1]]\n\nfs$lat\nfs$lon\n#street2coordinates(\"2543 Graystone Place, Simi Valley, CA 93065\")\n\n\nload('DEU_adm3.RData')\n[1] \"50.743342\"\n> fs$lon\n[1] \"7.073286\"\n#plot(gadm, col=\"grey75\", xlim=c(7,8), ylim=c(50,51))\n\nde<-gadm\nplot(de)\n\nde1<-de[1,]\npoints(x=7.073286, 50.743342, col=\"red\", lwd=10   )\n\nde\ntext()\n?points\n\n\nstr(de1)\n\nde1p<-de1@polygons\n\nde1p1<-de1p[[1]]\n\nstr(de1p1)\n\nde1p1p<-de1p1@Polygons\n\nstr(de1p1p)\n\nde1p1p[[1]]@coords\n\ncoo<-de[1,]@polygons[[1]]@Polygons[[1]]@coords\n\n\n#########################\nlibrary(SDMTools)\n\n#define the points and polygon\npnts = expand.grid(x=seq(1,6,0.1),y=seq(1,6,0.1))\npolypnts = cbind(x=c(2,3,3.5,3.5,3,4,5,4,5,5,4,3,3,3,2,2,1,1,1,1,2),\n                 y=c(1,2,2.5,2,2,1,2,3,4,5,4,5,4,3,3,4,5,4,3,2,2))\n\n#plot the polygon and all points to be checked\nplot(rbind(polypnts, pnts))\npolygon(polypnts,col='#99999990')\n\n#create check which points fall within the polygon\nout = pnt.in.poly(pnts,polypnts)\nhead(out)\n\n#identify points not in the polygon with an X\npoints(out[which(out$pip==0),1:2],pch='X')",
+    "created" : 1438386120864.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1269271781",
+    "id" : "D5D943EB",
+    "lastKnownWriteTime" : 1438386241,
+    "path" : "E:/Work/scriptlib/decadis-demo/decadis-demo.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

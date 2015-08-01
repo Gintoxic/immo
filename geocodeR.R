@@ -3,7 +3,7 @@
 library(sp)
 library(XML)
 library(rjson)
-library(dplyr)
+#library(dplyr)
 library(RJDBC)
 library(stringr)
 library(RCurl)
@@ -16,10 +16,12 @@ startzeit<-Sys.time()
 channel<-connectPostgres()  
 
 stmnt<-
-  "with add as(select distinct on(address) id, address from immolist where qtype=1 and importdate='<IMPDATE>') select a.* from add a left join immogeo g on a.address=g.address where g.id is null"
+  "with add as(select distinct on(address) id, address from immolist) select a.* from add a left join immogeo g on a.address=g.address where g.id is null"
 
-stmnt<-gsub("<IMPDATE>",as.character(Sys.Date(), "%Y-%m-%d"),stmnt)
 
+#stmnt<-gsub("<IMPDATE>",as.character(Sys.Date(), "%Y-%m-%d"),stmnt)
+
+#stmnt<-"select distinct on(address) id, address from immolist"
 # stmnt = paste("select distinct on(address) id, address from immolist where qtype=1 and importdate='",
 #               as.character(Sys.Date(), "%Y-%m-%d"),"' ",sep="")
 
@@ -37,7 +39,7 @@ str(whgm)
 whgm[1:10,]
 
 proc.started<-0
-for (i in 1:3000)
+for (i in 1:450)
 {
 addr<-gsub("(Kreis)","",gsub(" ","%20",gsub("ß","ss",gsub("ä","ae",gsub("ö","oe",gsub("ü","ue", whgm$address[i]))))))
 
@@ -46,7 +48,8 @@ base_url<-"http://nominatim.openstreetmap.org/search?q=<ADDRESS>&format=json&pol
 
 requrl<-gsub("<ADDRESS>", addr, base_url)
 r <- getURL(requrl)
-f <- fromJSON(r)
+f <- try(fromJSON(r))
+print(i)
 print (requrl)
 print(length(f))
 
