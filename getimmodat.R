@@ -1,3 +1,7 @@
+source("ginhist2d.R")
+source("dbFunctions.R")
+
+getwd()
 startzeit<-Sys.time()
 channel<-connectPostgres()  
 
@@ -9,6 +13,8 @@ disconnectPostgres(channel)
 
 laufzeit<-Sys.time()-startzeit
 print(laufzeit)
+
+#save(list = "immodat", file = "immodat.RData")
 
 str(immodat)
 
@@ -31,7 +37,7 @@ immodat$zimmmer<-as.numeric(v3b)
 
 library(gplots)
 
-?hist2d
+
 #ginhist2d( y=immodat$lat, x=immodat$lon,val=immodat$preis)
 #ginhist2d( y=immodat$lat, x=immodat$lon,val=immodat$preis)
 #ginhist2d( y=immodat$lat, x=immodat$lon,val=immodat$qm)
@@ -41,7 +47,7 @@ library(gplots)
 mycol<-colorRampPalette(c("#ffffff", "#003193"))(50)
 
 mycol<-c("#ffffff", colorRampPalette(c("#A6B7D9", "#003193"))(50))
-im.ret<-ginhist2d( y=immodat$lat, x=immodat$lon,val=immodat$qm, nbins = 20, col=mycol, func="mean")
+im.ret<-ginhist2d( y=immodat$lat, x=immodat$lon,val=immodat$qm, nbins = 20, col=mycol, func_choice="mean")
 
 
 str(im.ret)
@@ -64,11 +70,10 @@ im.unl<-unlist(im.ret)
 
 
 
-a[,1]
+
 a[1,1]==0.0
 
 
-im.unl
 load("DEU_adm1.RData")
 
 a<-gadm@polygons[[1]]

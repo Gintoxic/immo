@@ -2,6 +2,6 @@
     "installOptions" : {
         "installDependencies" : true,
         "installFromRepository" : true,
-        "libraryPath" : "E:/Tools/R/R-3.1.2/library"
+        "libraryPath" : "e:/Tools/R/R-3.2.1/library"
     }
 }

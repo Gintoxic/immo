@@ -1,7 +1,7 @@
 ginhist2d<-
 function (x, y = NULL,val, nbins = 200, same.scale = FALSE, na.rm = TRUE, 
           show = TRUE, col = c("black", heat.colors(12)), FUN = base::length, 
-          func = "sum",
+          func_choice = "sum",
           xlab, ylab, ...) 
 {
   if (is.null(y)) {
@@ -35,10 +35,10 @@ function (x, y = NULL,val, nbins = 200, same.scale = FALSE, na.rm = TRUE,
   index.y <- cut(y, y.cuts, include.lowest = TRUE)
   
   
-  if (func=="sum")
+  if (func_choice=="sum")
   {
   m <- tapply(val, list(index.x, index.y), FUN=sum)
-  }else if (func=="mean")
+  }else if (func_choice=="mean")
   {
   m <- tapply(val, list(index.x, index.y), FUN=mean)  
   }else {warning("unknown function")}

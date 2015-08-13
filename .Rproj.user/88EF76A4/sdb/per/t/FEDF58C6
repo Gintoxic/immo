@@ -1,0 +1,22 @@
+{
+    "contents" : "",
+    "created" : 1439503368488.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "FEDF58C6",
+    "lastKnownWriteTime" : 7741240723082584096,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "caption" : "immodat",
+        "contentUrl" : "content?title=immodat&file=3a8e58373a7a495cb3cab7747c8be2ab.htm",
+        "displayedObservations" : 1000,
+        "displayedVariables" : 10,
+        "totalObservations" : 2909,
+        "variables" : 10
+    },
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}
