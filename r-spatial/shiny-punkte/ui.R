@@ -12,7 +12,9 @@ shinyUI(fluidPage(
                   min = 60, max = 150, value = c(50,150)),
       
       sliderInput("yrange", "Y-Koordinaten:",
-                  min = 470, max = 560, value = c(470,560))
+                  min = 470, max = 560, value = c(470,560)),
+      
+      plotOutput("histPlot", height = 100, width = 100)
       
 #       selectInput("colormap", "Colormap:", 
 #                   choices = c(

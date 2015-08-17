@@ -1,0 +1,16 @@
+{
+    "contents" : "library(shiny)\n\nshinyUI(fluidPage(\n  \n  titlePanel(\"Kreise im Bundesland\"),\n \n  sidebarLayout(\n    sidebarPanel(\n      \n      ######################## Sidebar ######################\n      sliderInput(\"xrange\", \"X-Koordinaten:\",\n                  min = 60, max = 150, value = c(50,150)),\n      \n      sliderInput(\"yrange\", \"Y-Koordinaten:\",\n                  min = 470, max = 560, value = c(470,560)),\n      \n      plotOutput(\"histPlot\", height = 100, width = 100)\n      \n#       selectInput(\"colormap\", \"Colormap:\", \n#                   choices = c(\n#                     \"heat\",\"terrain\",\"rainbow\")),      \n#       \n#       sliderInput(\"ncols\",\n#                   \"Anz. Farben\",\n#                   min = 1,\n#                   max = 20,\n#                   value = 1),\n#       \n#       selectInput(\"bundesland\", \"Bundesland:\", \n#                   choices = c(\n#                     \"Baden-W?rttemberg\",\"Bayern\",\"Berlin\",\"Brandenburg\",\"Bremen\",\n#                     \"Hamburg\",\"Hessen\",\"Mecklenburg-Vorpommern\",\"Niedersachsen\",\"Nordrhein-Westfalen\",\n#                     \"Rheinland-Pfalz\",\"Saarland\",\"Sachsen\",\"Sachsen-Anhalt\",\"Schleswig-Holstein\",\n#                     \"Th?ringen\")),\n#       checkboxInput(\"names\", \"Namen anzeigen\", FALSE),\n#       checkboxInput(\"showgrid\", \"Gitter anzeigen\", FALSE)\n      ######################## Ende Sidebar ######################\n    ),\n    \n\n    mainPanel(\n      ######################## Main Panel ######################\n      plotOutput(\"distPlot\", height = 700, width = 400)\n      ######################## Ende Main Panel ######################\n    )\n  )\n))",
+    "created" : 1439664013391.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "703973721",
+    "id" : "73290AD1",
+    "lastKnownWriteTime" : 1439665068,
+    "path" : "E:/Work/immo/r-spatial/shiny-punkte/ui.R",
+    "project_path" : "r-spatial/shiny-punkte/ui.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "ddf = read.table(header=T, sep=\",\", text=\"\ncountry, val1, val2, val3\nNigeria,5,10,8\nChina,8,12,20\nBrazil,15,9,20\nItaly,9,25,5\nAustralia,15,5,25\n\")\nlibrary(rworldmap)\ni=1\nddf[1,]\n\nlibrary(Hmisc)\n\n\nsPDF <- joinCountryData2Map(ddf\n                            , joinCode = \"NAME\"\n                            , nameJoinColumn = \"country\"\n                            , verbose = TRUE)\n\ndf <- merge(x=ddf, y=sPDF@data[sPDF@data$ADMIN, c(\"ADMIN\", \"LON\", \"LAT\")], by.x=\"country\", by.y=\"ADMIN\", all.x=TRUE)\n\n\nplot(getMap())\nfor (i in 1:5)\n{\n  subplot(\n    plot(ddf[,i],axes=F,xlab = \"\", ylab=\"\", type=\"l\",lwd=5) \n    \n      \n#     barplot(height=as.numeric(as.character(unlist(df[i, 2:4], use.names=F))), \n#               \n#                   col=rainbow(3), ylim=range(df[,2:4]))\n#           \n          \n          ,x=df[i, 'LON'], y=df[i, 'LAT'], size=c(.3, .3))\n\n}\nlegend(\"topright\", legend=names(df[, 2:4]), fill=rainbow(3))",
+    "created" : 1439662937024.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "321181525",
+    "id" : "114A2B03",
+    "lastKnownWriteTime" : 1439666581,
+    "path" : "E:/Work/immo/map_barchart_demo.R",
+    "project_path" : "map_barchart_demo.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

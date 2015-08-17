@@ -1,11 +1,11 @@
 {
     "contents" : "setwd(\"E:/Work/immo\")\nlibrary(shiny)\n\nrunApp(\"r-spatial/shiny-kreise\")\nrunApp(\"r-spatial/shiny-punkte\")\nrunApp(\"r-spatial/shiny-hist\")\n\n\n\n# \n# \n# install.packages('devtools')\n# devtools::install_github('rstudio/shinyapps')\n# library(shinyapps)\n# shinyapps::setAccountInfo(name='gintoxic', token='ACA5C6CBF8B073FEE20D988348981187', secret='uPPKXtBsBPedqep5tMB9yY6s0Zgyucj15jEq1o5g')\n# \n# library(shinyapps)\n# \n# \n# deployApp(\"r-spatial/shiny-hist\")\n",
-    "created" : 1439487938573.000,
+    "created" : 1439662110765.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
     "hash" : "2827021707",
-    "id" : "F67B57F0",
+    "id" : "1CD76D43",
     "lastKnownWriteTime" : 1439505408,
     "path" : "E:/Work/immo/runApps.R",
     "project_path" : "runApps.R",

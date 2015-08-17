@@ -1,0 +1,16 @@
+{
+    "contents" : "library(shiny)\nlibrary(sp)\nlibrary(rgeos)    # Polygonberechnungen\n#options(warn=-1)\n\nload('DEU_adm1.RData')\nload('immodat.RData')\n\nshinyServer(function(input, output) {\n  \n  output$distPlot <- renderPlot({\n    \n    ###################### Reactive ###########################\n plot(gadm, xlim=input$xrange/10, ylim=input$yrange/10)\n points(immodat$lon, immodat$lat, pch=20)\n\n  t=1\n  tr<-c(immodat$lon[t], immodat$lat[t])\n\n  for (i in 1:2909)\n  {\n    lo<-c(immodat$lon[t],immodat$lon[i])\n    la<-c(immodat$lat[t],immodat$lat[i])\n    \n    lines(lo,la, col=\"blue3\")\n  \n  }\n\n    ###################### Ende Reactive ###########################\n})\n\noutput$histPlot <- renderPlot({\n \n  plot(1, mar=c(0,0,0,0))\n  })\n\n\n})",
+    "created" : 1439662251102.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "409645190",
+    "id" : "5F814D5E",
+    "lastKnownWriteTime" : 1439665327,
+    "path" : "E:/Work/immo/r-spatial/shiny-punkte/server.R",
+    "project_path" : "r-spatial/shiny-punkte/server.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

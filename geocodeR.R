@@ -39,10 +39,9 @@ str(whgm)
 whgm[1:10,]
 
 proc.started<-0
-for (i in 1:450)
+for (i in 1:4500)
 {
 addr<-gsub("(Kreis)","",gsub(" ","%20",gsub("ß","ss",gsub("ä","ae",gsub("ö","oe",gsub("ü","ue", whgm$address[i]))))))
-
 
 base_url<-"http://nominatim.openstreetmap.org/search?q=<ADDRESS>&format=json&polygon=0&addressdetails=1"
 

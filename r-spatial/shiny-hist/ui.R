@@ -3,7 +3,7 @@ library(gplots)
 
 shinyUI(fluidPage(
   
-  titlePanel("Kreise im Bundesland"),
+  titlePanel("immo-heatmap"),
  
   sidebarLayout(
     sidebarPanel(
@@ -18,8 +18,16 @@ shinyUI(fluidPage(
       sliderInput("nbins",
                                     "Anz. Einheiten",
                                     min = 5,
-                                    max = 40,
+                                    max = 250,
                                     value = 20),
+
+sliderInput("ncols",
+            "Anz. Farben",
+            min = 2,
+            max = 100,
+            value = 30),
+
+
       selectInput("val", "Farbkodierung", 
                                     choices = c(
                                       "qm","preis","zimmer", "preis_pqm")),

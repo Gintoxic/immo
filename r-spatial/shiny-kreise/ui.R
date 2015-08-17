@@ -9,19 +9,10 @@ shinyUI(fluidPage(
       
       ######################## Sidebar ######################
       
-      selectInput("colormap", "Colormap:", 
-                  choices = c(
-                    "heat","terrain","rainbow")),      
-      
-      sliderInput("ncols",
-                  "Anz. Farben",
-                  min = 1,
-                  max = 20,
-                  value = 1),
-      
+    
       selectInput("bundesland", "Bundesland:", 
                   choices = c(
-                    "Baden-W?rttemberg","Bayern","Berlin","Brandenburg","Bremen",
+                    "Bayern","Berlin","Brandenburg","Bremen",
                     "Hamburg","Hessen","Mecklenburg-Vorpommern","Niedersachsen","Nordrhein-Westfalen",
                     "Rheinland-Pfalz","Saarland","Sachsen","Sachsen-Anhalt","Schleswig-Holstein",
                     "Th?ringen")),
@@ -33,7 +24,8 @@ shinyUI(fluidPage(
 
     mainPanel(
       ######################## Main Panel ######################
-      plotOutput("distPlot")
+
+      plotOutput("distPlot", height = 700, width = 500)
       ######################## Ende Main Panel ######################
     )
   )

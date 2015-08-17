@@ -1,0 +1,17 @@
+{
+    "contents" : "addTrans <- function(color,trans)\n{\n  # This function adds transparancy to a color.\n  # Define transparancy with an integer between 0 and 255\n  # 0 being fully transparant and 255 being fully visable\n  # Works with either color and trans a vector of equal length,\n  # or one of the two of length 1.\n  \n  if (length(color)!=length(trans)&!any(c(length(color),length(trans))==1)) stop(\"Vector lengths not correct\")\n  if (length(color)==1 & length(trans)>1) color <- rep(color,length(trans))\n  if (length(trans)==1 & length(color)>1) trans <- rep(trans,length(color))\n  \n  num2hex <- function(x)\n  {\n    hex <- unlist(strsplit(\"0123456789ABCDEF\",split=\"\"))\n    return(paste(hex[(x-x%%16)/16+1],hex[x%%16+1],sep=\"\"))\n  }\n  rgb <- rbind(col2rgb(color),trans)\n  res <- paste(\"#\",apply(apply(rgb,2,num2hex),2,paste,collapse=\"\"),sep=\"\")\n  return(res)\n}",
+    "created" : 1439663340974.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "465696335",
+    "id" : "1A0E2624",
+    "lastKnownWriteTime" : 1439663354,
+    "path" : "E:/Work/immo/r-spatial/shiny-punkte/global.R",
+    "project_path" : "r-spatial/shiny-punkte/global.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

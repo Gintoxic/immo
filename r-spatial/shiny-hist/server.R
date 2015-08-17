@@ -18,9 +18,9 @@ shinyServer(function(input, output) {
   output$distPlot <- renderPlot({
     
     ###################### Reactive ###########################
-    mycol<-colorRampPalette(c("#ffffff", "#003193"))(50)
+    #mycol<-colorRampPalette(c("#ffffff", "#003193"))(50)
     
-    mycol<-c("#ffffff", colorRampPalette(c("#A6B7D9", "#003193"))(50))
+    mycol<-c("#ffffff", colorRampPalette(c("#A6B7D9", "#003193"))(input$ncols))
     
     
     valchoice<-immodat[,input$val]
